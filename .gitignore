@@ -1,0 +1,13 @@
+# Byte-compiled / distribution / env files
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+.env
+.env.*
+.venv/
+backend/data/carteira.db
+node_modules/
+dist/
+.vscode/
+.DS_Store
