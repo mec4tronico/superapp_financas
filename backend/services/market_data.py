@@ -19,14 +19,24 @@ class MarketDataService:
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
         }
+        self.last_error: str | None = None
 
     def acessar_pagina(self, url: str) -> str:
         """Realiza a requisição HTTP da página financeira."""
         if not url:
             raise ValueError("A URL da fonte não pode estar vazia.")
 
-        response = requests.get(url, headers=self.headers, timeout=15)
-        response.raise_for_status()
+        try:
+            response = requests.get(url, headers=self.headers, timeout=15)
+        except requests.RequestException as exc:
+            self.last_error = f"Erro ao executar: {exc}"
+            raise RuntimeError(self.last_error) from exc
+
+        if response.status_code != 200:
+            self.last_error = f"Erro no acesso à página. Status Code: {response.status_code}"
+            raise RuntimeError(self.last_error)
+
+        self.last_error = None
         return response.text
 
     def extrair_dados_html(self, html: str, ticker: str) -> dict[str, Any]:
