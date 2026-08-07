@@ -13,9 +13,6 @@ from backend.services.importadores.b3_excel_reader import (  # noqa: E402
     B3ExcelReaderError,
     open_b3_excel,
 )
-from backend.services.market_data import (  # noqa: E402
-    MarketDataService,
-)
 from backend.services.portfolio import (  # noqa: E402
     build_portfolio_table,
 )
@@ -89,48 +86,14 @@ with tab_b3:
                     pass
 
 with tab_mercado:
-    st.subheader("Dados Mercado")
-    st.write("Os dados financeiros serão consultados para os ativos presentes na carteira atual.")
+    st.subheader("Dados de Mercado")
 
-    if "portfolio_df" in locals() and not portfolio_df.empty:
-        ativos = portfolio_df["Ativo"].dropna().astype(str).tolist()
-        if ativos:
-            service = MarketDataService(source_name="statusinvest")
-            rows = []
-            for ativo in ativos:
-                try:
-                    dataframe = service.buscar_dados_ativo(ativo)
-                    row = dataframe.iloc[0].to_dict()
-                    rows.append(
-                        {
-                            "Ativo": ativo,
-                            "Cotação Atual": row.get("valor_atual", "DADO INDISPONÍVEL"),
-                            "Mínima 52 semanas": row.get("min_52_semanas", "DADO INDISPONÍVEL"),
-                            "Máxima 52 semanas": row.get("max_52_semanas", "DADO INDISPONÍVEL"),
-                            "Dividend Yield": row.get("dividend_yield", "DADO INDISPONÍVEL"),
-                            "Valorização 12 meses": row.get("valorizacao_12m", "DADO INDISPONÍVEL"),
-                            "Status": "OK",
-                        }
-                    )
-                except Exception:
-                    rows.append(
-                        {
-                            "Ativo": ativo,
-                            "Cotação Atual": "OFFLINE",
-                            "Mínima 52 semanas": "OFFLINE",
-                            "Máxima 52 semanas": "OFFLINE",
-                            "Dividend Yield": "OFFLINE",
-                            "Valorização 12 meses": "OFFLINE",
-                            "Status": "OFFLINE",
-                        }
-                    )
-
-            if rows:
-                market_df = pd.DataFrame(rows)
-                st.dataframe(market_df, use_container_width=True)
-            else:
-                st.info("Nenhum ativo disponível para consulta de mercado.")
-        else:
-            st.info("A carteira atual ainda não contém ativos para consultar.")
+    csv_path = ROOT / "backend" / "data" / "dados_mercado.csv"
+    if not csv_path.exists():
+        st.info("Ainda não há dados de mercado disponíveis.")
     else:
-        st.info("Carregue uma carteira na aba Carteira B3 para visualizar os dados de mercado.")
+        market_df = pd.read_csv(csv_path)
+        if market_df.empty:
+            st.info("Nenhum dado de mercado foi encontrado.")
+        else:
+            st.dataframe(market_df, width="stretch")

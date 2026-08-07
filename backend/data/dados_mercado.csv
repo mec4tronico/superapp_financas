@@ -1,0 +1,4 @@
+ticker,valor_atual,minima_52_semanas,maxima_52_semanas,dividend_yield,valorizacao_12_meses,data_consulta,status
+KNCR11,"106,50","92,11","108,56","13,46","14,64%",2026-08-06,OK
+MCCI11,"93,27","76,42","97,40","12,87","20,19%",2026-08-06,OK
+PETR4,"42,13","28,32","49,34",DADO INDISPONÍVEL,"46,39%",2026-08-06,DADO INDISPONÍVEL
