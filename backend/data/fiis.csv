@@ -1,0 +1,235 @@
+ticker,nome,segmento
+KNCR11,Kinea Rendimentos Imobiliários,Papel
+HGLG11,Cshg Logística,Logística
+XPML11,XP Malls,Shopping
+VILG11,Vinci Logística,Logística
+HGRE11,HG Real Estate,Logística
+BRCO11,Bradesco Carteira Imobiliária,Papel
+BTLG11,BTG Pactual Logística,Logística
+TRXF11,TRX Real Estate,Logística
+MXRF11,Maxi Renda,Logística
+HGRU11,HG Real Estate,Logística
+RBRP11,RBR Properties,Shopping
+BCRI11,Bradesco CRI,Papel
+GTWR11,Greenstone Wey,Logística
+VISC11,Vinci Shopping Centers,Shopping
+FOF11,Focus FOF,Fundos de Fundos
+ABCP11,AF Invest CRI,Papel
+AIEC11,Autonomy Edifícios Corporativos,Lajes Corporativas
+AQLL11,Aquila,Logística
+ARCT11,Art Capital,Logística
+ATCR11,Atrio,Logística
+BARI11,Banestes Renda Imobiliária,Papel
+BBFO11,Bb FOF,Fundos de Fundos
+BBIM11,Bb Imobiliário,Shopping
+BBPO11,Bb Progressivo,Papel
+BICE11,Bicicleta,Shopping
+BIME11,Bm Renda Imobiliária,Papel
+BIPD11,BP Capital Desenvolvimento,Logística
+BIVA11,Biva,Logística
+BLMG11,Bloco,Logística
+BMLC11,BrMalls,Shopping
+BRCR11,Br CRI,Papel
+BRLI11,Bradesco Renda Imobiliária,Papel
+BRPR11,Brasil Prime,Shopping
+CPTS11,Capitânia,Logística
+CRFF11,Cr Realty,Shopping
+CVBI11,Cv Bi,Logística
+CYCR11,Cyrela Crédito Imobiliário,Papel
+DOVL11,Dovetail Logística,Logística
+EDFO11,Edifício FOF,Fundos de Fundos
+EGAF11,EGAF,Logística
+ERPA11,Erra,Logística
+FEXC11,Flexa,Shopping
+FIGS11,Fig,Logística
+FIIB11,FII B,Fundos de Fundos
+FLMA11,Flama,Logística
+FVPQ11,FV Pq,Logística
+GALG11,Galapagos,Logística
+GCFF11,Gc FOF,Fundos de Fundos
+GGBR11,Ggb Renda,Logística
+GGRC11,GGRC,Logística
+GTLG11,Get Net,Logística
+HBRH11,Habitação,Hospital
+HCTR11,Hc Trading,Logística
+HFOF11,High FOF,Fundos de Fundos
+HGCR11,HG Crédito Imobiliário,Papel
+HGFF11,HG FOF,Fundos de Fundos
+HGPO11,HG Portfolio,Logística
+HSAF11,HSAF,Logística
+HSML11,HSM,Logística
+IBCR11,Ibcr,Logística
+IDFI11,IDFI,Logística
+IRIM11,IRIM,Logística
+ITIP11,Itip,Logística
+JTPR11,Jt Property,Shopping
+KFOF11,KF FOF,Fundos de Fundos
+KISU11,Kis,Logística
+KORE11,Kora,Logística
+LASC11,Lasc,Logística
+LFTT11,Lft,Logística
+LUGG11,Lugg,Logística
+MALL11,Mall,Shopping
+MCHF11,Mc H,Logística
+MFAI11,Mitre,Shopping
+MGLG11,Magna,Logística
+MORC11,Mor Credit,Papel
+MORF11,Mor Finance,Logística
+NEWL11,New Logística,Logística
+NCHB11,North,Shopping
+NCRI11,Ncri,Papel
+NEXO11,Nexo,Logística
+NVHO11,NVHO,Logística
+PABY11,Paby,Shopping
+PBLG11,PB Logística,Logística
+PCHL11,Plural Ch,Shopping
+PEAL11,Peal,Logística
+PINE11,Pine,Logística
+PLCR11,Plurial CRI,Papel
+PORD11,Porto,Shopping
+PQAG11,Pqag,Logística
+PRSN11,Prs,Logística
+RBRR11,RBR Renda,Shopping
+RBRY11,RBR Y,Shopping
+RBRL11,RBR L,Logística
+RBRD11,RBR D,Logística
+RBRS11,RBR S,Logística
+RBVA11,RBVA,Logística
+RCRI11,RCRI,Papel
+RECR11,Recr,Logística
+RMAI11,Rmai,Shopping
+RPDM11,Rpdm,Shopping
+RURA11,Rural,Logística
+SARE11,Sare,Logística
+SCPF11,Scf,Logística
+SDIL11,SDI,Logística
+SEQR11,Sequoia,Shopping
+SHDP11,Shdp,Shopping
+SHPH11,Shph,Shopping
+SNFF11,Snf,Logística
+SPAF11,Spa,Shopping
+SRXQ11,Srx,Logística
+TBOF11,TBOF,Fundos de Fundos
+TCIN11,Tcin,Shopping
+TCKD11,Tckd,Logística
+TCOC11,Tcoc,Logística
+TCRN11,Tcrn,Logística
+TGAR11,Tgar,Shopping
+TIBR11,Tibr,Logística
+TIET11,Tiet,Logística
+TRBL11,Trbl,Shopping
+TRIS11,Tris,Logística
+URPR11,Urp,Shopping
+VBIH11,VBI H,Logística
+VCJR11,Vcjr,Shopping
+VGHF11,Vghf,Shopping
+VTLT11,Vtlt,Logística
+WPLZ11,Wealth,Shopping
+XPLG11,Xp Logística,Logística
+XPCI11,Xp Corporate,Logística
+YCHY11,Ych,Shopping
+ZIFI11,Zifi,Logística
+ZOLL11,Zoll,Logística
+RBRF11,RBR FOF,Fundos de Fundos
+HGBS11,HGBS,Shopping
+HGBL11,HGBL,Logística
+HGBX11,HGBX,Logística
+HGBR11,HGBR,Logística
+HGBI11,HGBI,Logística
+HGBJ11,HGBJ,Logística
+HGBK11,HGBK,Logística
+HGBM11,HGBM,Logística
+HGBN11,HGBN,Logística
+HGBO11,HGBO,Logística
+HGBP11,HGBP,Logística
+HGBQ11,HGBQ,Logística
+HGBR11,HGBR,Logística
+HGBS11,HGBS,Shopping
+HGBT11,HGBT,Logística
+HGBU11,HGBU,Logística
+HGBV11,HGBV,Logística
+HGBW11,HGBW,Logística
+HGBY11,HGBY,Logística
+HGBZ11,HGBZ,Logística
+HGCX11,HGCX,Logística
+HGDA11,HGDA,Logística
+HGDB11,HGDB,Logística
+HGDC11,HGDC,Logística
+HGDD11,HGDD,Logística
+HGDH11,HGDH,Logística
+HGDI11,HGDI,Logística
+HGDJ11,HGDJ,Logística
+HGDK11,HGDK,Logística
+HGDL11,HGDL,Logística
+HGDM11,HGDM,Logística
+HGDN11,HGDN,Logística
+HGDO11,HGDO,Logística
+HGDP11,HGDP,Logística
+HGDQ11,HGDQ,Logística
+HGDR11,HGDR,Logística
+HGDS11,HGDS,Logística
+HGDT11,HGDT,Logística
+HGDU11,HGDU,Logística
+HGDV11,HGDV,Logística
+HGDW11,HGDW,Logística
+HGDX11,HGDX,Logística
+HGDY11,HGDY,Logística
+HGDZ11,HGDZ,Logística
+HGFA11,HGFA,Logística
+HGFB11,HGFB,Logística
+HGFC11,HGFC,Logística
+HGFD11,HGFD,Logística
+HGFE11,HGFE,Logística
+HGFF11,HGFF,Logística
+HGFH11,HGFH,Logística
+HGFI11,HGFI,Logística
+HGFJ11,HGFJ,Logística
+HGFK11,HGFK,Logística
+HGFL11,HGFL,Logística
+HGFM11,HGFM,Logística
+HGFN11,HGFN,Logística
+HGFO11,HGFO,Logística
+HGFQ11,HGFQ,Logística
+HGFR11,HGFR,Logística
+HGFS11,HGFS,Logística
+HGFT11,HGFT,Logística
+HGFU11,HGFU,Logística
+HGFV11,HGFV,Logística
+HGFW11,HGFW,Logística
+HGFX11,HGFX,Logística
+HGFY11,HGFY,Logística
+HGGA11,HGGA,Logística
+HGGB11,HGGB,Logística
+HGGC11,HGGC,Logística
+HGGD11,HGGD,Logística
+HGGF11,HGGF,Logística
+HGGG11,HGGG,Logística
+HGGH11,HGGH,Logística
+HGGI11,HGGI,Logística
+HGGJ11,HGGJ,Logística
+HGGK11,HGGK,Logística
+HGGL11,HGGL,Logística
+HGGM11,HGGM,Logística
+HGGN11,HGGN,Logística
+HGGO11,HGGO,Logística
+HGGQ11,HGGQ,Logística
+HGGR11,HGGR,Logística
+HGGS11,HGGS,Logística
+HGGU11,HGGU,Logística
+HGGV11,HGGV,Logística
+HGGW11,HGGW,Logística
+HGGX11,HGGX,Logística
+HGGY11,HGGY,Logística
+HGGZ11,HGGZ,Logística
+HGHA11,HGHA,Logística
+HGHB11,HGHB,Logística
+HGHC11,HGHC,Logística
+HGHD11,HGHD,Logística
+HGHE11,HGHE,Logística
+HGHF11,HGHF,Logística
+HGHG11,HGHG,Logística
+HGHH11,HGHH,Logística
+HGHI11,HGHI,Logística
+HGHJ11,HGHJ,Logística
+HGHK11,HGHK,Logística
+GHAL11,GHAL,Logística
