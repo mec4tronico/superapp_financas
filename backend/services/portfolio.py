@@ -139,6 +139,7 @@ def normalize_b3_negotiation_data(dataframe: pd.DataFrame) -> pd.DataFrame:
     normalized["codigo_negociacao"] = normalized["codigo_negociacao"].astype(str).str.strip()
     normalized["codigo_negociacao"] = normalized["codigo_negociacao"].replace({"nan": pd.NA})
     normalized = normalized.dropna(subset=["codigo_negociacao"])
+    normalized["codigo_negociacao"] = normalized["codigo_negociacao"].apply(_normalizar_ticker)
 
     return normalized
 
@@ -149,7 +150,7 @@ def build_portfolio_table(dataframe: pd.DataFrame) -> pd.DataFrame:
 
     if normalized.empty:
         return pd.DataFrame(
-            columns=["Ativo", "Quantidade", "Preço Médio", "Valor Investido"]
+            columns=["Ticker", "Tipo_Ativo", "Primeira_Aquisicao", "Quantidade", "Preco_Medio", "Valor_Investido"]
         )
 
     portfolio: list[dict[str, Any]] = []
@@ -172,43 +173,106 @@ def build_portfolio_table(dataframe: pd.DataFrame) -> pd.DataFrame:
             else 0.0
         )
         valor_investido = quantidade_atual * preco_medio
+        primeira_aquisicao = compras["data_negocio"].dropna().min() if not compras["data_negocio"].dropna().empty else pd.NaT
 
         portfolio.append(
             {
-                "Ativo": ativo,
+                "Ticker": ativo,
+                "Tipo_Ativo": classificar_ativo(str(ativo)),
+                "Primeira_Aquisicao": primeira_aquisicao,
                 "Quantidade": int(quantidade_atual)
                 if abs(quantidade_atual - round(quantidade_atual)) < 1e-9
                 else round(quantidade_atual, 2),
-                "Preço Médio": round(preco_medio, 2),
-                "Valor Investido": round(valor_investido, 2),
-                "Tipo_Ativo": classificar_ativo(str(ativo)),
+                "Preco_Medio": round(preco_medio, 2),
+                "Valor_Investido": round(valor_investido, 2),
+            }
+        )
+
+    carteira = pd.DataFrame(
+        portfolio,
+        columns=["Ticker", "Tipo_Ativo", "Primeira_Aquisicao", "Quantidade", "Preco_Medio", "Valor_Investido"],
+    )
+    return normalizar_carteira(carteira)
+
+
+def normalizar_carteira(carteira: pd.DataFrame) -> pd.DataFrame:
+    """Normaliza a carteira consolidando ativos fracionários e classificando o tipo."""
+    if carteira is None:
+        raise ValueError("A carteira de entrada não pode ser nula.")
+
+    if carteira.empty:
+        return pd.DataFrame(
+            columns=["Ticker", "Tipo_Ativo", "Primeira_Aquisicao", "Quantidade", "Preco_Medio", "Valor_Investido"]
+        )
+
+    normalized = carteira.copy()
+    normalized["Ticker"] = normalized["Ticker"].astype(str).str.strip().str.upper()
+    normalized["Ticker"] = normalized["Ticker"].apply(_normalizar_ticker)
+    normalized["Quantidade"] = pd.to_numeric(normalized["Quantidade"], errors="coerce")
+    normalized["Preco_Medio"] = pd.to_numeric(normalized["Preco_Medio"], errors="coerce")
+    normalized["Valor_Investido"] = pd.to_numeric(normalized["Valor_Investido"], errors="coerce")
+    normalized["Tipo_Ativo"] = normalized["Ticker"].apply(classificar_ativo)
+
+    normalized["Primeira_Aquisicao"] = pd.to_datetime(
+        normalized["Primeira_Aquisicao"], errors="coerce"
+    )
+
+    normalized["Ativo_Base"] = normalized["Ticker"].apply(_normalizar_ticker)
+
+    resultado: list[dict[str, Any]] = []
+    for ativo_base, grupo in normalized.groupby("Ativo_Base", sort=True):
+        quantidade_total = float(grupo["Quantidade"].sum())
+        valor_total = float(grupo["Valor_Investido"].sum())
+        preco_medio = (
+            valor_total / quantidade_total if quantidade_total > 0 else 0.0
+        )
+        primeira_aquisicao = grupo["Primeira_Aquisicao"].dropna().min() if not grupo["Primeira_Aquisicao"].dropna().empty else pd.NaT
+
+        resultado.append(
+            {
+                "Ticker": ativo_base,
+                "Tipo_Ativo": classificar_ativo(ativo_base),
+                "Primeira_Aquisicao": primeira_aquisicao,
+                "Quantidade": int(quantidade_total)
+                if abs(quantidade_total - round(quantidade_total)) < 1e-9
+                else round(quantidade_total, 2),
+                "Preco_Medio": round(preco_medio, 2),
+                "Valor_Investido": round(valor_total, 2),
             }
         )
 
     return pd.DataFrame(
-        portfolio,
-        columns=["Ativo", "Quantidade", "Preço Médio", "Valor Investido", "Tipo_Ativo"],
+        resultado,
+        columns=["Ticker", "Tipo_Ativo", "Primeira_Aquisicao", "Quantidade", "Preco_Medio", "Valor_Investido"],
     )
+
+
+def _normalizar_ticker(ticker: str) -> str:
+    """Normaliza o ticker removendo espaços, padronizando maiúsculas e removendo o sufixo F quando for fracionário."""
+    cleaned = str(ticker).strip().upper()
+    if cleaned.endswith("F") and len(cleaned) > 1:
+        return cleaned[:-1]
+    return cleaned
 
 
 def classificar_ativo(ticker: str) -> str:
     """Classifica um ativo consultando a base local de FIIs."""
     if not ticker:
-        return "OUTRO"
+        return "ACAO"
 
     normalized_ticker = str(ticker).strip().upper()
     if not FIIS_CSV_PATH.exists():
-        return "OUTRO"
+        return "ACAO"
 
     fiis_df = pd.read_csv(FIIS_CSV_PATH)
     if fiis_df.empty:
-        return "OUTRO"
+        return "ACAO"
 
     known_tickers = fiis_df["ticker"].astype(str).str.strip().str.upper()
     if normalized_ticker in set(known_tickers):
         return "FII"
 
-    return "OUTRO"
+    return "ACAO"
 
 
 def _find_matching_column(dataframe: pd.DataFrame, aliases: list[str]) -> str | None:
