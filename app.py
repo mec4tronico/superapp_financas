@@ -84,4 +84,7 @@ if uploaded_file is not None:
         st.error(f"Ocorreu um erro inesperado ao processar o arquivo: {exc}")
     finally:
         if temp_path is not None:
-            temp_path.unlink(missing_ok=True)
+            try:
+                temp_path.unlink(missing_ok=True)
+            except PermissionError:
+                pass
