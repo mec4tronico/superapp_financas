@@ -4,9 +4,14 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from pathlib import Path
 from typing import Any
 
 import pandas as pd
+
+
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+FIIS_CSV_PATH = DATA_DIR / "fiis.csv"
 
 
 def normalize_b3_negotiation_data(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -176,10 +181,34 @@ def build_portfolio_table(dataframe: pd.DataFrame) -> pd.DataFrame:
                 else round(quantidade_atual, 2),
                 "Preço Médio": round(preco_medio, 2),
                 "Valor Investido": round(valor_investido, 2),
+                "Tipo_Ativo": classificar_ativo(str(ativo)),
             }
         )
 
-    return pd.DataFrame(portfolio, columns=["Ativo", "Quantidade", "Preço Médio", "Valor Investido"])
+    return pd.DataFrame(
+        portfolio,
+        columns=["Ativo", "Quantidade", "Preço Médio", "Valor Investido", "Tipo_Ativo"],
+    )
+
+
+def classificar_ativo(ticker: str) -> str:
+    """Classifica um ativo consultando a base local de FIIs."""
+    if not ticker:
+        return "OUTRO"
+
+    normalized_ticker = str(ticker).strip().upper()
+    if not FIIS_CSV_PATH.exists():
+        return "OUTRO"
+
+    fiis_df = pd.read_csv(FIIS_CSV_PATH)
+    if fiis_df.empty:
+        return "OUTRO"
+
+    known_tickers = fiis_df["ticker"].astype(str).str.strip().str.upper()
+    if normalized_ticker in set(known_tickers):
+        return "FII"
+
+    return "OUTRO"
 
 
 def _find_matching_column(dataframe: pd.DataFrame, aliases: list[str]) -> str | None:
